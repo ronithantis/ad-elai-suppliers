@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מצטרפים למאגר הספקים של hub2care / עד-אלי</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* Skip link */
+  .skip-link { position:absolute; top:-40px; right:0; background:var(--teal); color:#fff; padding:8px 16px; font-size:15px; font-weight:700; text-decoration:none; border-radius:0 0 0 8px; z-index:9999; transition:top .2s; }
+  .skip-link:focus { top:0; }
+  :root {
+    --teal:      #1B7A78;
+    --teal-dark: #135f5d;
+    --teal-mid:  #2a9d9a;
+    --teal-light:#eaf4f4;
+    --text:      #18181b;
+    --text-light:#52525b;
+    --border:    #d4e4e4;
+    --bg:        #f5fafa;
+    --radius:    14px;
+    --radius-sm: 9px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Heebo', sans-serif; background: var(--bg); color: var(--text); direction: rtl; overflow-x: hidden; }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, #0d4f4d 0%, var(--teal) 50%, var(--teal-mid) 100%); padding: 64px 24px 72px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content:''; position:absolute; width:500px; height:500px; border-radius:50%; background:rgba(255,255,255,0.04); top:-200px; left:-100px; }
+  .logo { display:inline-flex; align-items:center; gap:8px; font-size:20px; font-weight:900; color:rgba(255,255,255,0.9); margin-bottom:36px; }
+  .logo svg { width:22px; height:22px; stroke:rgba(255,255,255,0.9); fill:none; }
+  .hero-badge { display:inline-block; background:rgba(255,255,255,0.15); border:1.5px solid rgba(255,255,255,0.3); color:#fff; font-size:13px; font-weight:600; padding:6px 18px; border-radius:20px; margin-bottom:22px; }
+  .hero h1 { font-size:40px; font-weight:900; color:#fff; line-height:1.2; margin-bottom:14px; }
+  .hero h1 span { color:#fbbf24; }
+  .hero-sub-title { font-size:19px; color:rgba(255,255,255,0.88); max-width:620px; margin:0 auto 16px; line-height:1.65; font-weight:500; }
+  .hero-intro { font-size:15px; color:rgba(255,255,255,0.72); max-width:620px; margin:0 auto 36px; line-height:1.7; background:rgba(0,0,0,0.15); border-radius:var(--radius-sm); padding:16px 20px; text-align:right; }
+  .hero-cta { display:inline-flex; align-items:center; gap:10px; background:#fff; color:var(--teal-dark); font-size:17px; font-weight:800; padding:14px 32px; border-radius:50px; cursor:pointer; border:none; font-family:'Heebo',sans-serif; box-shadow:0 8px 30px rgba(0,0,0,0.2); transition:transform .2s; }
+  .hero-cta:hover { transform:translateY(-2px); }
+  .hero-cta svg { width:18px; height:18px; stroke:var(--teal); fill:none; }
+  .hero-cta-alt { display:inline-flex; align-items:center; gap:10px; background:rgba(255,255,255,0.15); color:#fff; font-size:17px; font-weight:700; padding:14px 32px; border-radius:50px; cursor:pointer; border:2px solid rgba(255,255,255,0.4); font-family:'Heebo',sans-serif; backdrop-filter:blur(10px); transition:transform .2s; }
+  .hero-cta-alt:hover { transform:translateY(-2px); }
+  .hero-cta-alt svg { width:18px; height:18px; stroke:#fff; fill:none; }
+  .btns-row { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:16px; }
+  .hero-note { font-size:13px; color:rgba(255,255,255,0.6); margin-top:14px; }
+
+  /* STATS */
+  .stats { background:#fff; border-bottom:1.5px solid var(--border); padding:24px; display:flex; justify-content:center; gap:40px; flex-wrap:wrap; }
+  .stat { text-align:center; }
+  .stat-num { font-size:28px; font-weight:900; color:var(--teal); }
+  .stat-label { font-size:13px; color:var(--text-light); margin-top:3px; }
+
+  /* SECTION */
+  .section { padding:56px 24px; max-width:900px; margin:0 auto; }
+  .section-title { font-size:30px; font-weight:900; text-align:center; margin-bottom:8px; }
+  .section-sub { font-size:16px; color:var(--text-light); text-align:center; margin-bottom:40px; }
+
+  .benefits-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  @media(max-width:700px){ .benefits-grid{grid-template-columns:1fr;} .hero h1{font-size:26px;} }
+
+  .benefit-card { background:#fff; border:1.5px solid var(--border); border-radius:var(--radius); padding:26px 22px; text-align:center; transition:transform .2s, box-shadow .2s; }
+  .benefit-card:hover { transform:translateY(-3px); box-shadow:0 8px 28px rgba(27,122,120,0.12); }
+  .benefit-icon { width:50px; height:50px; background:var(--teal-light); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; }
+  .benefit-icon svg { width:22px; height:22px; stroke:var(--teal); fill:none; }
+  .benefit-card h3 { font-size:17px; font-weight:800; margin-bottom:7px; }
+  .benefit-card p { font-size:14px; color:var(--text-light); line-height:1.6; }
+
+  /* HOW */
+  .how-section { background:var(--teal-light); padding:56px 24px; }
+  .steps { max-width:680px; margin:0 auto; }
+  .step { display:flex; align-items:flex-start; gap:18px; padding:20px 0; border-bottom:1.5px solid var(--border); }
+  .step:last-child { border-bottom:none; }
+  .step-num { width:42px; height:42px; background:var(--teal); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:900; flex-shrink:0; }
+  .step-content h4 { font-size:17px; font-weight:800; margin-bottom:4px; }
+  .step-content p { font-size:14px; color:var(--text-light); line-height:1.6; }
+
+  /* WHO */
+  .who-grid { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:28px; }
+  .who-chip { background:#fff; border:1.5px solid var(--border); border-radius:50px; padding:9px 18px; font-size:14px; font-weight:600; display:flex; align-items:center; gap:7px; }
+  .who-chip svg { width:15px; height:15px; stroke:var(--teal); fill:none; }
+
+  /* FORM SECTION */
+  .form-section { background:linear-gradient(135deg,#0d4f4d 0%,var(--teal) 100%); padding:64px 24px; text-align:center; }
+  .form-section h2 { font-size:32px; font-weight:900; color:#fff; margin-bottom:10px; }
+  .form-section > p { font-size:16px; color:rgba(255,255,255,0.85); margin-bottom:30px; }
+
+  .form-card { background:#fff; border-radius:20px; padding:36px; max-width:580px; margin:0 auto; box-shadow:0 20px 60px rgba(0,0,0,0.2); text-align:right; }
+
+  .form-group { display:flex; flex-direction:column; gap:7px; margin-bottom:16px; }
+  label { font-size:15px; font-weight:700; color:var(--text); }
+  input, select, textarea { padding:12px 14px; border:1.5px solid var(--border); border-radius:var(--radius-sm); font-size:15px; font-family:'Heebo',sans-serif; color:var(--text); outline:none; transition:border-color .2s; direction:rtl; background:#fff; width:100%; }
+  input:focus, select:focus, textarea:focus { border-color:var(--teal); box-shadow:0 0 0 3px rgba(27,122,120,0.09); }
+  textarea { min-height:80px; resize:vertical; }
+
+  .radio-group { display:flex; gap:20px; margin-top:6px; flex-wrap:wrap; }
+  .radio-item { display:flex; align-items:center; gap:8px; font-size:15px; font-weight:500; cursor:pointer; }
+  .radio-item input[type="radio"] { width:18px; height:18px; accent-color:var(--teal); }
+
+  .chips-wrap { display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
+  .chip { padding:7px 13px; border-radius:20px; border:1.5px solid var(--border); background:#fff; font-size:13px; font-weight:500; cursor:pointer; transition:all .18s; font-family:'Heebo',sans-serif; }
+  .chip.selected { background:var(--teal-light); border-color:var(--teal); color:var(--teal); font-weight:700; }
+
+  .info-note { background:#fff7ed; border:1.5px solid #f59e0b; border-radius:var(--radius-sm); padding:11px 14px; font-size:13px; color:#78350f; line-height:1.6; margin-bottom:14px; }
+  .privacy-note { background:var(--teal-light); border-radius:var(--radius-sm); padding:11px 14px; font-size:12px; color:var(--teal-dark); line-height:1.65; margin-top:14px; }
+
+  .checkbox-agree { display:flex; align-items:flex-start; gap:10px; margin-bottom:16px; cursor:pointer; }
+  .checkbox-agree input { width:18px; height:18px; min-width:18px; accent-color:var(--teal); margin-top:3px; flex-shrink:0; }
+  .checkbox-agree span { font-size:13px; color:var(--text); line-height:1.65; font-weight:400; }
+
+  .contact-note { font-size:13px; color:var(--text-light); line-height:1.6; margin-bottom:16px; background:#f8f9fa; border-radius:var(--radius-sm); padding:10px 13px; }
+
+  .submit-btn { width:100%; background:var(--teal); color:#fff; border:none; border-radius:var(--radius-sm); padding:14px; font-size:17px; font-weight:800; cursor:pointer; font-family:'Heebo',sans-serif; transition:background .2s; }
+  .submit-btn:hover { background:var(--teal-dark); }
+  .submit-btn:disabled { background:#9ca3af; cursor:not-allowed; }
+
+  .bottom-note { font-size:12px; color:var(--text-light); text-align:center; margin-top:12px; line-height:1.6; }
+
+  /* SUCCESS */
+  .success-msg { display:none; text-align:center; padding:16px 0; }
+  .success-icon { width:68px; height:68px; background:var(--teal-light); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; }
+  .success-icon svg { width:34px; height:34px; stroke:var(--teal); fill:none; }
+  .success-msg h3 { font-size:22px; font-weight:900; margin-bottom:8px; }
+  .success-msg p { font-size:15px; color:var(--text-light); line-height:1.6; }
+
+  /* MODAL */
+  .modal-bg { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:999; align-items:center; justify-content:center; }
+  .modal-bg.open { display:flex; }
+  .modal-box { background:#fff; border-radius:20px; padding:32px 36px; max-width:640px; width:92%; max-height:88vh; overflow-y:auto; direction:rtl; box-shadow:0 20px 60px rgba(0,0,0,0.2); }
+  .modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+  .modal-header h2 { font-size:19px; font-weight:900; }
+  .modal-close { background:none; border:none; font-size:26px; cursor:pointer; color:var(--text-light); line-height:1; }
+  .modal-body { font-size:14px; line-height:1.85; color:var(--text); }
+  .modal-body h4 { font-size:14px; font-weight:800; color:var(--teal); margin:18px 0 5px; }
+  .modal-body p { margin-bottom:10px; color:var(--text-light); }
+  .modal-warning { background:#fff7ed; border:1.5px solid #f59e0b; border-radius:var(--radius-sm); padding:12px 14px; font-size:12px; color:#78350f; margin-top:16px; line-height:1.6; }
+
+  /* FOOTER */
+  footer { background:#0d1117; padding:28px 24px; text-align:center; font-size:13px; color:#6b7280; line-height:1.8; }
+  footer a { color:#2a9d9a; text-decoration:underline; cursor:pointer; margin:0 6px; }
+
+  /* Required field mark */
+  .req { color:#dc2626; margin-right:2px; }
+  /* Focus visible */
+  *:focus-visible { outline:3px solid var(--teal); outline-offset:2px; }
+  /* Error message */
+  .field-error { color:#dc2626; font-size:13px; margin-top:4px; display:none; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-form">דלג לטופס</a>
+<main>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="logo">
+    <svg viewBox="0 0 24 24" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    עַד אֵלַי | hub2care ←
+  </div>
+  <div class="hero-badge">🚀 פתיחת המאגר – הצטרפו ראשונים</div>
+  <h1>מצטרפים למאגר הספקים של<br><span>hub2care / עד-אלי</span></h1>
+  <div class="hero-sub-title">אנחנו בונים מאגר ספקי שירותים עד הבית לקשישים – לקראת פיתוח פלטפורמה ושירותים עתידיים.<br>אם אתם ספקי שירות מתאימים, או אם אתם לקוחות, בני משפחה, מטפלים או ממליצים המכירים ספק מתאים – נשמח לקבל פרטים.</div>
+  <div class="hero-intro">
+    דף זה מיועד לאיסוף ראשוני של פרטי ספקים והמלצות על ספקים, לצורך בחינה, מיון, יצירת קשר ובניית מאגר עתידי.<br><br>
+    <strong>שליחת פרטים באמצעות דף זה אינה מהווה</strong> אישור, קבלה למאגר, התחייבות לפרסום, התחייבות להפניה ללקוחות, התחייבות לשיתוף פעולה, התקשרות חוזית, המלצה, דירוג, בדיקה, אימות או התחייבות מכל סוג מצד hub2care / עד-אלי.<br><br>
+    hub2care / עד-אלי שומרת לעצמה את מלוא שיקול הדעת אם ליצור קשר, לבקש מידע נוסף, לשמור את המידע, להשתמש בו לצורך בחינה ופיתוח השירות, או שלא להמשיך בתהליך כלל.
+  </div>
+  <div class="btns-row">
+    <button class="hero-cta" onclick="showMode('supplier')">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+      אני ספק / נותן שירות
+    </button>
+    <button class="hero-cta-alt" onclick="showMode('recommend')">
+      <svg viewBox="0 0 24 24" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      אני ממליץ/ה על ספק
+    </button>
+  </div>
+  <div class="hero-note">השאירו פרטים ונחזור אליכם תוך 48 שעות</div>
+</div>
+
+<!-- STATS -->
+<div class="stats fade-in">
+  <div class="stat"><div class="stat-num">חינם</div><div class="stat-label">מילוי הטופס</div></div>
+  <div class="stat"><div class="stat-num">48 שע'</div><div class="stat-label">זמן תגובה מקסימלי</div></div>
+  <div class="stat"><div class="stat-num">5%</div><div class="stat-label">הנחה מינימלית ללקוחות המאגר</div></div>
+  <div class="stat"><div class="stat-num">כל הארץ</div><div class="stat-label">אזורי פעילות</div></div>
+</div>
+
+<!-- BENEFITS -->
+<div class="section">
+  <div class="section-title fade-in">למה להצטרף?</div>
+  <div class="section-sub fade-in">אנחנו בונים פלטפורמה שתחבר ספקים מאומתים עם קשישים ומשפחותיהם</div>
+  <div class="benefits-grid">
+    <div class="benefit-card fade-in">
+      <div class="benefit-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+      <h3>לקוחות ממוקדים</h3>
+      <p>המאגר פונה לגיל השלישי – לקוחות שצריכים שירות קבוע ומתמשך.</p>
+    </div>
+    <div class="benefit-card fade-in">
+      <div class="benefit-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h3>אמינות ובטחון</h3>
+      <p>המאגר כולל סינון ובחינה של ספקים – מה שמגן עליכם ועל הלקוחות.</p>
+    </div>
+    <div class="benefit-card fade-in">
+      <div class="benefit-icon"><svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <h3>חשיפה עתידית</h3>
+      <p>פרופיל מקצועי בפלטפורמה שבפיתוח – בחיפוש לפי אזור וקטגוריה.</p>
+    </div>
+    <div class="benefit-card fade-in">
+      <div class="benefit-icon"><svg viewBox="0 0 24 24" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <h3>הנחה = יתרון</h3>
+      <p>הצטרפות מחייבת הנחה של 5% לפחות – יתרון ברור ללקוחות המאגר.</p>
+    </div>
+    <div class="benefit-card fade-in">
+      <div class="benefit-icon"><svg viewBox="0 0 24 24" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <h3>בניית מוניטין</h3>
+      <p>לקוחות מדרגים – ציון גבוה מופיע ראשון ומושך יותר פניות.</p>
+    </div>
+    <div class="benefit-card fade-in">
+      <div class="benefit-icon"><svg viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+      <h3>פרטיות מוגנת</h3>
+      <p>פרטי הקשר מוצגים רק למשתמשים רשומים בהתאם לחוק הגנת הפרטיות.</p>
+    </div>
+  </div>
+</div>
+
+<!-- WHO -->
+<div style="background:#fff;border-top:1.5px solid var(--border);border-bottom:1.5px solid var(--border);padding:44px 24px;text-align:center;">
+  <div class="section-title fade-in" style="font-size:24px;">מי יכול להצטרף?</div>
+  <div class="who-grid fade-in">
+    <div class="who-chip"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>אחות / סיעוד</div>
+    <div class="who-chip"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>פיזיותרפיה</div>
+    <div class="who-chip"><svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>פדיקור / ספרית</div>
+    <div class="who-chip"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>ארוחות מוכנות</div>
+    <div class="who-chip"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>ניקיון</div>
+    <div class="who-chip"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>חשמלאי / הנדימן</div>
+    <div class="who-chip"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>עו"ס / מלווה</div>
+    <div class="who-chip"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>הסעות רפואיות</div>
+    <div class="who-chip"><svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>ועוד...</div>
+  </div>
+</div>
+
+<!-- HOW -->
+<div class="how-section">
+  <div class="section-title fade-in" style="text-align:center;margin-bottom:8px;">איך זה עובד?</div>
+  <div class="section-sub fade-in">תהליך פשוט</div>
+  <div class="steps fade-in">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><h4>מלאו את הטופס</h4><p>שם, סוג שירות, אזור פעילות וטלפון – לוקח כדקה.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><h4>נחזור אליכם תוך 48 שעות</h4><p>נשוחח, נבחן התאמה ונשלח שאלון קצר לבניית הפרופיל.</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><h4>הפרופיל שלכם במאגר</h4><p>לאחר אישור תופיעו בחיפוש לפי אזור וקטגוריה.</p></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><h4>לקוחות יוצרים קשר</h4><p>פרטי הקשר שלכם מוצגים למשתמשים רשומים בלבד.</p></div></div>
+  </div>
+</div>
+
+<!-- FORM -->
+<div class="form-section" id="form-section">
+
+  <!-- SUPPLIER FORM -->
+  <div id="mode-supplier" style="display:none;">
+    <h2>השאירו פרטים</h2>
+    <p>אני פונה כספק / נותן שירות</p>
+    <div class="form-card fade-in" id="main-form">
+      <div id="form-content">
+
+        <div class="form-group">
+          <label for="f-name">שם מלא <span class="req" aria-hidden="true">*</span></label>
+          <input type="text" id="f-name" name="name" placeholder="שם פרטי ומשפחה" aria-required="true" autocomplete="name"/>
+        </div>
+
+        <div class="form-group">
+          <label for="f-business">שם העסק / הספק</label>
+          <input type="text" id="f-business" name="business" placeholder="שם העסק אם יש" autocomplete="organization"/>
+        </div>
+
+        <div class="form-group">
+          <label for="f-phone">טלפון <span class="req" aria-hidden="true">*</span></label>
+          <input type="tel" id="f-phone" name="phone" placeholder="050-0000000" aria-required="true" autocomplete="tel"/>
+        </div>
+
+        <div class="form-group">
+          <label for="f-email">דוא"ל</label>
+          <input type="email" id="f-email" name="email" placeholder="your@email.com" autocomplete="email"/>
+        </div>
+
+        <div class="form-group">
+          <label for="f-region">עיר / אזור פעילות <span class="req" aria-hidden="true">*</span></label>
+          <select id="f-region" name="region" aria-required="true">
+            <option value="">בחרו אזור...</option>
+            <option>צפון</option>
+            <option>חיפה והקריות</option>
+            <option>מרכז – גוש דן</option>
+            <option>שרון</option>
+            <option>ירושלים והסביבה</option>
+            <option>שפלה</option>
+            <option>דרום</option>
+            <option>כל הארץ</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>תחום שירות *</label>
+          <div class="chips-wrap" id="service-chips">
+            <div class="chip" onclick="toggleChip(this)">סיעוד / אחות</div>
+            <div class="chip" onclick="toggleChip(this)">פיזיותרפיה</div>
+            <div class="chip" onclick="toggleChip(this)">פדיקור</div>
+            <div class="chip" onclick="toggleChip(this)">ספרית / ספר</div>
+            <div class="chip" onclick="toggleChip(this)">קוסמטיקאית</div>
+            <div class="chip" onclick="toggleChip(this)">ארוחות מוכנות</div>
+            <div class="chip" onclick="toggleChip(this)">ניקיון</div>
+            <div class="chip" onclick="toggleChip(this)">חשמלאי</div>
+            <div class="chip" onclick="toggleChip(this)">הנדימן</div>
+            <div class="chip" onclick="toggleChip(this)">עו"ס / ליווי</div>
+            <div class="chip" onclick="toggleChip(this)">הסעות רפואיות</div>
+            <div class="chip" onclick="toggleChip(this)">שיניים בבית</div>
+            <div class="chip" onclick="toggleChip(this)">מסאז' רפואי</div>
+            <div class="chip" onclick="toggleChip(this)">אחר</div>
+          </div>
+          <input type="text" id="f-service-other" placeholder="פרטו..." style="display:none;margin-top:8px;"/>
+        </div>
+
+        <div class="form-group">
+          <label>ניסיון מקצועי</label>
+          <select id="f-experience">
+            <option value="">בחרו...</option>
+            <option>פחות משנה</option>
+            <option>1–3 שנים</option>
+            <option>3–5 שנים</option>
+            <option>5–10 שנים</option>
+            <option>10+ שנים</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>האם יש ברשותכם ביטוח / תעודה / רישיון / ממליצים?</label>
+          <select id="f-certs">
+            <option value="">בחרו...</option>
+            <option>כן – ביטוח מקצועי בתוקף</option>
+            <option>כן – תעודה / רישיון</option>
+            <option>כן – ממליצים</option>
+            <option>כמה מהאמור לעיל</option>
+            <option>לא</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>ספרו לנו בקצרה על השירות שלכם</label>
+          <textarea id="f-note" placeholder="תיאור קצר של השירות, ניסיון, אזורי פעילות, ועוד..."></textarea>
+          <div class="info-note">אין לכלול בטופס מידע רפואי, מידע רגיש, מספר תעודת זהות, פרטי בנק, כרטיס אשראי, סיסמאות, קודים, או כל מידע אישי שאינו נדרש לצורך הפנייה.</div>
+        </div>
+
+        <!-- CHECKBOX - exact text from document -->
+        <label class="checkbox-agree">
+          <input type="checkbox" id="f-agree" required aria-required="true"/>
+          <span>אני מאשר/ת כי קראתי את <a onclick="openTerms()" style="color:var(--teal);text-decoration:underline;cursor:pointer;">תנאי השימוש והפרטיות</a> שלהלן, ואני מסכים/ה לתנאים אלה. אני מצהיר/ה כי כל המידע, המסמכים והפרטים שמסרתי נכונים, מלאים ומעודכנים למיטב ידיעתי; כי אני מוסמך/ת למסור אותם; כי אם מסרתי פרטים על אדם או עסק אחר, אני רשאי/ת לעשות כן; וכי ידוע לי ששליחת הפרטים אינה מבטיחה צירוף למאגר, פרסום, דירוג, אימות, קידום, הפניה ללקוחות או כל התקשרות עתידית.</span>
+        </label>
+
+        <div class="contact-note">בשליחת הטופס אני מאשר/ת ל-hub2care / עד-אלי ליצור עמי קשר בקשר לפנייה שהגשתי, לצורך בחינת התאמה, בקשת פרטים נוספים והמשך טיפול בפנייה.</div>
+
+        <button class="submit-btn" onclick="submitSupplier()">שליחה ואישור התנאים</button>
+
+        <div class="privacy-note">המידע שתמסרו יישמר במאגרי המידע של hub2care / עד-אלי וישמש לצורך בחינת התאמה, יצירת קשר, בניית מאגר ספקים, פיתוח שירותים עתידיים, תפעול, ניתוח נתונים ואבטחה – בכפוף לדין. אינכם חייבים למסור מידע, אך ללא מסירתו ייתכן שלא נוכל לטפל בפנייה. אין למסור מידע רפואי או מידע אישי רגיש מעבר לנדרש.</div>
+      </div>
+
+      <div class="success-msg" id="success-supplier">
+        <div class="success-icon"><svg viewBox="0 0 24 24" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h3>קיבלנו! תודה 🎉</h3>
+        <p>נחזור אליכם תוך 48 שעות לבחינת התאמה ולהמשך תהליך ההצטרפות.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECOMMEND FORM -->
+  <div id="mode-recommend" style="display:none;">
+    <h2>השאירו פרטים</h2>
+    <p>אני פונה כלקוח/ה, בן/בת משפחה, מטפל/ת או ממליץ/ה על ספק</p>
+    <div class="form-card fade-in">
+      <div id="recommend-content">
+
+        <div class="form-group">
+          <label>שם הספק / נותן השירות *</label>
+          <input type="text" id="r-provider-name" placeholder="שם מלא של הספק"/>
+        </div>
+
+        <div class="form-group">
+          <label>שם העסק (אם יש)</label>
+          <input type="text" id="r-business-name" placeholder="שם העסק"/>
+        </div>
+
+        <div class="form-group">
+          <label>טלפון של הספק *</label>
+          <input type="tel" id="r-provider-phone" placeholder="050-0000000"/>
+        </div>
+
+        <div class="form-group">
+          <label>תחום השירות *</label>
+          <select id="r-service">
+            <option value="">בחרו...</option>
+            <option>סיעוד / אחות</option>
+            <option>פיזיותרפיה</option>
+            <option>פדיקור</option>
+            <option>ספרית / ספר</option>
+            <option>קוסמטיקאית</option>
+            <option>ארוחות מוכנות</option>
+            <option>ניקיון</option>
+            <option>חשמלאי / הנדימן</option>
+            <option>עו"ס / ליווי</option>
+            <option>הסעות רפואיות</option>
+            <option>שיניים בבית</option>
+            <option>מסאז' רפואי</option>
+            <option>אחר</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>ממה הייתם מרוצים?</label>
+          <div class="chips-wrap" id="happy-chips">
+            <div class="chip" onclick="this.classList.toggle('selected')">הגיע בזמן</div>
+            <div class="chip" onclick="this.classList.toggle('selected')">מקצועיות גבוהה</div>
+            <div class="chip" onclick="this.classList.toggle('selected')">יחס אנושי וחם</div>
+            <div class="chip" onclick="this.classList.toggle('selected')">מחיר הוגן</div>
+            <div class="chip" onclick="this.classList.toggle('selected')">אמינות ושקיפות</div>
+            <div class="chip" onclick="this.classList.toggle('selected')">זמינות גבוהה</div>
+            <div class="chip" onclick="this.classList.toggle('selected')">סבלנות עם הקשיש</div>
+            <div class="chip" onclick="this.classList.toggle('selected')">תוצאות מצוינות</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>ספרו לנו בקצרה על ההמלצה *</label>
+          <textarea id="r-text" placeholder="למשל: הגיע בזמן, היה סבלני מאוד, הסביר הכל בצורה ברורה..."></textarea>
+          <div class="info-note">אין לכלול בטופס מידע רפואי, מידע רגיש, מספר תעודת זהות, פרטי בנק, כרטיס אשראי, סיסמאות, קודים, או כל מידע אישי שאינו נדרש לצורך הפנייה.</div>
+        </div>
+
+        <div class="form-group">
+          <label>השם שלכם (אופציונלי)</label>
+          <input type="text" id="r-recommender-name" placeholder="שם פרטי בלבד"/>
+        </div>
+
+        <!-- CHECKBOX -->
+        <label class="checkbox-agree">
+          <input type="checkbox" id="r-agree" required aria-required="true"/>
+          <span>אני מאשר/ת כי קראתי את <a onclick="openTerms()" style="color:var(--teal);text-decoration:underline;cursor:pointer;">תנאי השימוש והפרטיות</a> שלהלן, ואני מסכים/ה להם. אני מצהיר/ה כי כל המידע שמסרתי נכון ומלא; כי אם מסרתי פרטים על ספק אחר, אני רשאי/ת לעשות כן; וכי ידוע לי ששליחת הפרטים אינה מבטיחה צירוף הספק למאגר, פרסומו, אימותו או כל התקשרות עתידית.</span>
+        </label>
+
+        <div class="contact-note">בשליחת הטופס אני מאשר/ת ל-hub2care / עד-אלי ליצור עמי קשר בקשר לפנייה שהגשתי, לצורך בחינת התאמה, בקשת פרטים נוספים והמשך טיפול בפנייה.</div>
+
+        <button class="submit-btn" onclick="submitRecommend()" style="background:#16a34a;">שליחה ואישור התנאים ⭐</button>
+
+        <div class="privacy-note">המידע שתמסרו יישמר במאגרי המידע של hub2care / עד-אלי וישמש לצורך בחינת התאמה, יצירת קשר ובניית מאגר ספקים – בכפוף לדין. אין למסור מידע רפואי או מידע אישי רגיש מעבר לנדרש.</div>
+      </div>
+
+      <div class="success-msg" id="success-recommend">
+        <div class="success-icon" style="background:#f0fdf4;">
+          <svg viewBox="0 0 24 24" stroke-width="2" style="stroke:#16a34a;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h3>תודה על ההמלצה! ⭐</h3>
+        <p>ההמלצה שלכם תסייע למצוא ספקים אמינים. נבדוק ונטפל בפנייה בהקדם.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <strong style="color:#e2e8f0;">hub2care / עד-אלי</strong> – פלטפורמה מנגישה לשירותים לגיל השלישי
+  <br style="margin-top:6px;">
+  <a onclick="openTerms()" role="button" tabindex="0">תנאי שימוש ומסירת מידע</a>
+  <a onclick="openAccessibility()" role="button" tabindex="0">הצהרת נגישות</a>
+  <br style="margin-top:8px;">
+  <span>שליחת הטופס אינה מהווה אישור קבלה למאגר או התחייבות מצד hub2care / עד-אלי. אנא מסרו מידע נכון בלבד.</span>
+</footer>
+
+<!-- ACCESSIBILITY MODAL -->
+<div class="modal-bg" id="accessibility-modal" role="dialog" aria-modal="true" aria-labelledby="access-title">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2 id="access-title">הצהרת נגישות</h2>
+      <button class="modal-close" onclick="closeAccessibility()" aria-label="סגור הצהרת נגישות">×</button>
+    </div>
+    <div class="modal-body">
+      <p>hub2care / עד-אלי רואה חשיבות בהנגשת האתר ודפי הנחיתה שלה לכלל המשתמשים, ופועלת לשיפור הנגישות הדיגיטלית באופן שוטף.</p>
+      <p>אנו משקיעים מאמצים סבירים לשיפור חוויית השימוש, לרבות התאמת מבנה הדפים, טפסים, כותרות, אמצעי ניווט ותצוגה במכשירים שונים.</p>
+      <p>ייתכן שחלקים מסוימים טרם הונגשו באופן מלא. אנו ממשיכים לפעול לשיפור הנגישות באופן שוטף.</p>
+      <p>אם נתקלתם בקושי נגישות, בעיה טכנית או צורך בהתאמה – נשמח לקבל פנייה ולנסות לסייע בהקדם.</p>
+      <h4>פרטי קשר בנושא נגישות</h4>
+      <p>דוא"ל: <a href="mailto:info@hub2care.co.il" style="color:var(--teal);">info@hub2care.co.il</a></p>
+      <div class="modal-warning">ניתן לפנות אלינו גם לצורך קבלת מידע או סיוע באמצעים חלופיים, ככל שניתן.</div>
+    </div>
+    <div style="text-align:center;margin-top:22px;">
+      <button onclick="closeAccessibility()" style="background:var(--teal);color:#fff;border:none;border-radius:var(--radius-sm);padding:12px 32px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Heebo',sans-serif;">סגור</button>
+    </div>
+  </div>
+</div>
+
+<!-- TERMS MODAL -->
+<div class="modal-bg" id="terms-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>תנאי שימוש ומסירת מידע</h2>
+      <button class="modal-close" onclick="closeTerms()">×</button>
+    </div>
+    <div class="modal-body">
+
+      <h4>כללי</h4>
+      <p>דף זה מופעל על ידי hub2care / עד-אלי ונועד לצורך איסוף מידע ראשוני על ספקי שירותים והמלצות על ספקים, לצורך בחינה, מיון, יצירת קשר ובניית מאגר עתידי בתחום השירותים עד הבית לקשישים.</p>
+
+      <h4>אין התחייבות לצירוף, פרסום או התקשרות</h4>
+      <p>מסירת פרטים באמצעות דף זה אינה מקנה כל זכות להצטרף למאגר, להופיע באתר או בפלטפורמה, לקבל פניות, לקבל הפניות ללקוחות, לקבל עדיפות, ליהנות מחשיפה, לקבל דירוג, להיחשב כספק מאושר או לעבור כל בדיקה.</p>
+      <p>hub2care / עד-אלי רשאית, לפי שיקול דעתה הבלעדי, ליצור קשר או שלא ליצור קשר, לבקש מסמכים נוספים, לשמור פרטים, למחוק פרטים, לדחות פנייה, או להימנע מהמשך טיפול מכל סיבה שהיא.</p>
+
+      <h4>אחריות מוסר המידע</h4>
+      <p>כל מי שמוסר מידע באמצעות דף זה מצהיר כי המידע, המסמכים, ההצהרות, ההמלצות, התיאורים ופרטי ההתקשרות שנמסרו על ידו הם נכונים, מדויקים, מלאים ומעודכנים למיטב ידיעתו. מוסר המידע אחראי בלעדית לתוכן שנמסר על ידו.</p>
+
+      <h4>מסירת מידע על צדדים שלישיים</h4>
+      <p>מי שמוסר פרטים על ספק אחר – בין אם כלקוח, בן משפחה, מטפל, ממליץ או בכל כובע אחר – מצהיר כי הוא רשאי לעשות כן וכי קיבל, ככל שנדרש לפי דין, את הסכמת אותו אדם או עסק למסירת הפרטים ולפנייה אליו. מוסר המידע מתחייב שלא למסור מידע שאין לו הרשאה למסור, ושלא לכלול מידע רפואי, מידע פיננסי, סיסמאות, קודים, מספרי תעודות זהות או מידע רגיש אחר שאינו דרוש.</p>
+
+      <h4>היעדר אימות, בדיקה או אישור</h4>
+      <p>אלא אם צוין במפורש ובכתב אחרת, hub2care / עד-אלי אינה מתחייבת לבדוק, לאמת, לאשר או לחקור באופן עצמאי את נכונות המידע שנמסר, לרבות רישוי, ביטוח, תעודות, ממליצים, ניסיון מקצועי, איכות השירות, זמינות או התאמה מקצועית. עצם קבלת המידע, שמירתו או יצירת קשר בעקבותיו אינם מהווים אימות, אישור, בדיקה, המלצה או מצג.</p>
+
+      <h4>שימוש במידע שנמסר</h4>
+      <p>hub2care / עד-אלי רשאית לשמור את המידע שנמסר, למיין אותו, לנתח אותו, לעבד אותו, לבקש פרטים או מסמכים נוספים, ליצור קשר עם מוסר המידע או עם הספק שהומלץ, ולבחון אפשרות לשלבו במאגר, בפלטפורמה, בשירות עתידי או בפעילות עסקית קשורה – בכפוף לדין.</p>
+      <p>מבלי לגרוע מהאמור, hub2care / עד-אלי אינה מחויבת לעשות שימוש כלשהו במידע שנמסר לה ואינה מחויבת לשמור אותו למשך תקופה מסוימת, בכפוף לדין.</p>
+
+      <h4>שימוש במסמכים ובתוכן שנמסר</h4>
+      <p>במסירת טקסטים, מסמכים, קבצים, תמונות, תעודות, המלצות או כל חומר אחר, מוסר המידע מאשר כי הוא רשאי למסור אותם וכי מסירתם אינה מפרה זכויות של צד שלישי, לרבות פרטיות, סודיות, זכויות יוצרים או כל דין אחר.</p>
+
+      <h4>היעדר הסתמכות</h4>
+      <p>אין לראות בדף זה, בשליחת הטופס, במענה מצד hub2care / עד-אלי, ביצירת קשר, בשיחת היכרות, בבקשת מסמכים, או בכל התכתבות אחרת, משום התחייבות להתקשרות, להכללה במאגר, לפרסום, לשיתוף פעולה, להצגת ספק, לדירוגו או להמלצה עליו.</p>
+
+      <h4>הגבלת אחריות</h4>
+      <p>בכפוף לכל דין שאינו ניתן להתניה, hub2care / עד-אלי לא תישא באחריות לכל נזק, הוצאה, אובדן, מניעת רווח, פגיעה במוניטין, הסתמכות, אובדן הזדמנות או כל נזק ישיר או עקיף הנובעים ממסירת מידע באמצעות דף זה, מהיעדר מענה, מדחיית פנייה, מאי צירוף למאגר, משמירת מידע, ממחיקתו, מטעות בהקלדה, מתקלה טכנית, או מהחלטה שלא להתקדם עם מועמדות של ספק.</p>
+
+      <h4>זמינות ושינויים</h4>
+      <p>hub2care / עד-אלי רשאית לשנות את דף הנחיתה, את הטפסים, את התנאים, את אופן איסוף המידע, את השירותים העתידיים או את עצם היוזמה, בכל עת וללא הודעה מוקדמת.</p>
+
+      <h4>פרטיות</h4>
+      <p>המידע שיימסר עשוי להישמר במאגרי המידע של hub2care / עד-אלי ולעבור עיבוד לצורכי תפעול, יצירת קשר, בדיקת התאמה, בניית מאגר, פיתוח שירותים עתידיים, אבטחה וניתוח נתונים – בכפוף לדין. אין למסור מידע רפואי או מידע אישי רגיש מעבר לנדרש לצורך הפנייה.</p>
+
+      <h4>דין חל וסמכות שיפוט</h4>
+      <p>על תנאים אלה יחולו דיני מדינת ישראל בלבד. סמכות השיפוט המקומית הייחודית בכל מחלוקת תהיה נתונה לבתי המשפט המוסמכים בתל אביב-יפו בלבד.</p>
+
+      <div class="modal-warning">* מסמך זה הוא נוסח עבודה. מומלץ לאשר עם עורך דין לפני פרסום רשמי.</div>
+    </div>
+    <div style="text-align:center;margin-top:22px;">
+      <button onclick="closeTerms()" style="background:var(--teal);color:#fff;border:none;border-radius:var(--radius-sm);padding:12px 32px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Heebo',sans-serif;">הבנתי, סגור</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyhtkyEj-JhfLATC7xRsB7cFcV6g6iUgK2nJx53Rw0GEgM5opNVh6DQkcV6N3zhWIo7Xw/exec';
+
+  function showMode(mode) {
+    document.getElementById('mode-supplier').style.display  = mode==='supplier'  ? 'block' : 'none';
+    document.getElementById('mode-recommend').style.display = mode==='recommend' ? 'block' : 'none';
+    document.getElementById('form-section').scrollIntoView({behavior:'smooth'});
+  }
+
+  function toggleChip(el) {
+    el.classList.toggle('selected');
+    const hasOther = [...document.querySelectorAll('#service-chips .chip.selected')].some(c=>c.textContent.trim()==='אחר');
+    document.getElementById('f-service-other').style.display = hasOther ? 'block' : 'none';
+  }
+
+  function submitSupplier() {
+    const name   = document.getElementById('f-name').value.trim();
+    const phone  = document.getElementById('f-phone').value.trim();
+    const region = document.getElementById('f-region').value;
+    const agree  = document.getElementById('f-agree').checked;
+    const services = [...document.querySelectorAll('#service-chips .chip.selected')].map(c=>c.textContent.trim()).join(', ');
+
+    if(!name)     { alert('נא למלא שם מלא'); return; }
+    if(!phone)    { alert('נא למלא טלפון'); return; }
+    if(!region)   { alert('נא לבחור אזור פעילות'); return; }
+    if(!services) { alert('נא לבחור לפחות תחום שירות אחד'); return; }
+    if(!agree)    { alert('יש לאשר את תנאי השימוש והפרטיות'); return; }
+
+    const payload = {
+      type: 'supplier',
+      name,
+      business: document.getElementById('f-business').value.trim(),
+      phone,
+      email: document.getElementById('f-email').value.trim(),
+      services: services + (document.getElementById('f-service-other').value ? ' / '+document.getElementById('f-service-other').value : ''),
+      region,
+      experience: document.getElementById('f-experience').value,
+      certs: document.getElementById('f-certs').value,
+      note: document.getElementById('f-note').value.trim()
+    };
+
+    sendToSheet(payload);
+    document.getElementById('form-content').style.display   = 'none';
+    document.getElementById('success-supplier').style.display = 'block';
+  }
+
+  function submitRecommend() {
+    const providerName  = document.getElementById('r-provider-name').value.trim();
+    const providerPhone = document.getElementById('r-provider-phone').value.trim();
+    const service       = document.getElementById('r-service').value;
+    const text          = document.getElementById('r-text').value.trim();
+    const agree         = document.getElementById('r-agree').checked;
+
+    if(!providerName)  { alert('נא למלא שם הספק'); return; }
+    if(!providerPhone) { alert('נא למלא טלפון הספק'); return; }
+    if(!service)       { alert('נא לבחור תחום שירות'); return; }
+    if(!text)          { alert('נא לספר על ההמלצה'); return; }
+    if(!agree)         { alert('יש לאשר את תנאי השימוש והפרטיות'); return; }
+
+    const happy = [...document.querySelectorAll('#happy-chips .chip.selected')].map(c=>c.textContent.trim()).join(', ');
+    const payload = {
+      type: 'recommendation',
+      providerName,
+      business: document.getElementById('r-business-name').value.trim(),
+      phone: providerPhone,
+      service, happy, text,
+      recommenderName: document.getElementById('r-recommender-name').value.trim()
+    };
+
+    sendToSheet(payload);
+    document.getElementById('recommend-content').style.display = 'none';
+    document.getElementById('success-recommend').style.display = 'block';
+  }
+
+  function sendToSheet(payload) {
+    fetch(SHEET_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+    const key = payload.type === 'supplier' ? 'supplier_leads' : 'recommendations';
+    const arr = JSON.parse(localStorage.getItem(key)||'[]');
+    arr.push({...payload, timestamp: new Date().toISOString()});
+    localStorage.setItem(key, JSON.stringify(arr));
+  }
+
+  function openTerms()  { document.getElementById('terms-modal').classList.add('open'); }
+  function closeTerms() { document.getElementById('terms-modal').classList.remove('open'); }
+  document.getElementById('terms-modal').addEventListener('click', function(e){ if(e.target===this) closeTerms(); });
+
+  function openAccessibility()  { document.getElementById('accessibility-modal').classList.add('open'); }
+  function closeAccessibility() { document.getElementById('accessibility-modal').classList.remove('open'); }
+  document.getElementById('accessibility-modal').addEventListener('click', function(e){ if(e.target===this) closeAccessibility(); });
+
+  // Keyboard support for footer links
+  document.querySelectorAll('footer a[role="button"]').forEach(el => {
+    el.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); this.click(); } });
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
